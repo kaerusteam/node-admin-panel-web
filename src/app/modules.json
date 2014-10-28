@@ -1,0 +1,32 @@
+{
+	"dependencies":[
+		"/app/common/services/server-api.js",
+		"/app/common/services/auth.js",
+		"/app/common/services/localization.js"
+	],
+	"common": {
+		"services": {
+
+		},
+		"directives":{
+
+		}
+	},
+	"vendorModules":{
+
+	},
+	"coreModules": {
+		"sidebar": {
+			"main":	"sidebar/sidebar.js",
+			"dependencies": [
+				"sidebar/services/sidebar-service.js"
+			]
+		}
+	},
+	"userModules": {
+		"moduleTemplate": {
+			"main": "module_template/module-template.js",
+			"dependencies": []
+		}
+	}
+}

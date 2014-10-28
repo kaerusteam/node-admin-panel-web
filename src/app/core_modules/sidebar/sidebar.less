@@ -1,0 +1,37 @@
+@import "../../../../vendor/bootstrap/less/variables.less";
+@import "../../../css/variables.less";
+
+#sidebar{
+	padding-left: 8px;
+	background: @navbar-default-bg;
+	overflow: hidden;
+	position: fixed;
+	z-index: 1000;
+
+	@media(max-width: @screen-xs-max){
+		width: 100% / @grid-columns * 6;	
+	}
+
+	transition: width ease-out 0.2s;	
+	ul{
+		li{
+			a{
+				padding-left: 10px;
+			}
+		}
+	}
+
+	&.collapsed{
+		@media(max-width: @screen-xs-max){
+			width: 100% / @grid-columns * 1;
+			transition: width ease-out 0.2s;
+			ul{
+				li{
+					a{
+						padding-left: 0px;
+					}
+				}
+			}
+		}
+	}
+}
