@@ -1,7 +1,7 @@
 "use strict";
 
 (function() {
-	var common = angular.module('app.common', ['app']);
+	var common = angular.module('app.common');
 
 	common.factory('serverAPI', ['$http', 'auth', 'localization', function($http, auth, localization) {
 		return {

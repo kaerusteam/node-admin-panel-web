@@ -30,9 +30,14 @@ PSEUDOnginx.prototype.start = function(){
 		next();
 	});
 
+
 	this.app.use(lessMiddleware('../src', {debug: true}));
-	this.app.use(express.static('../src'));
+
+	this.app.use('/', express.static('../src'));
+	this.app.use('*', express.static('../src'));
+
 	this.app.get('/', express.static('../src/index.html'));
+	this.app.get('*', express.static('../src/index.html'));
 
 	var apiProxy = httpProxy.createProxyServer({
 		target: {
@@ -44,7 +49,8 @@ PSEUDOnginx.prototype.start = function(){
 	this.app.post('/*', function(req, res) {
 		apiProxy.proxyRequest(req, res);
 	});
-	
+
+
 	http.createServer(this.app).listen(this.port);
 	console.log('PSEUDOnginx running on ' + this.port);
 }

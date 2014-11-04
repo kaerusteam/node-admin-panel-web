@@ -1,22 +1,20 @@
 {
-	"dependencies":[
-		"/app/common/services/server-api.js",
-		"/app/common/services/auth.js",
-		"/app/common/services/localization.js"
+	"sidebar": [
+		"moduleTemplate"
 	],
 	"common": {
-		"services": {
-
-		},
-		"directives":{
-
-		}
+		"main": "common.js",
+		"dependencies":[
+			"services/server-api.js",
+			"services/auth.js",
+			"services/localization.js"
+		]
 	},
 	"vendorModules":{
 
 	},
 	"coreModules": {
-		"sidebar": {
+		"app.sidebar": {
 			"main":	"sidebar/sidebar.js",
 			"dependencies": [
 				"sidebar/services/sidebar-service.js"
@@ -25,8 +23,14 @@
 	},
 	"userModules": {
 		"moduleTemplate": {
+			"info": {
+				"name": "Module template",
+				"url": "/module_template"
+			},
 			"main": "module_template/module-template.js",
-			"dependencies": []
+			"dependencies": [
+				"module_template/controllers/module-template-controller.js"
+			]
 		}
 	}
 }
