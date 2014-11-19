@@ -6,32 +6,32 @@
 	common.factory('serverAPI', ['$http', 'auth', 'localization', function($http, auth, localization) {
 		return {
 			call: function(url, data, callback){
-				var data = {
-					data: data || {},
+				if (arguments.length == 3){
+					var __callback = callback;
+					var __data = data;
+				}else{
+					var __callback = data;
+				}
+				var params = {
 					authToken: auth.authToken,
 					locale: localization.currentLocale
 				}
-
+				if (typeof(__data) != "undefined" && __data != null){
+					params.data = __data;
+				}
 				$http({
 					method: "POST", 
 					url: url, 
-					data : data,
+					data : params,
 					cache: false
 				}).success(function (res) {
-					// $scope.download = false;
-					// if (!res.error) {
-					// 	if(res.data.stats.length === 0) {
-					// 		alertService.add("danger", "Нет данных за указанный промежуток", 2000);
-					// 	}
-					// 	$scope.stats.common = {
-					// 		all: res.data.stats,
-					// 		avg: { }
-					// 	}
-					// 	callback && callback();
-					// }
-					// else {
-					// 	alertService.add("danger", res.error.message);
-					// }
+					if (!res.error){
+						__callback(null, res.result);
+					}else{
+						__callback(res.error);
+					}
+				}).error(function (err) {
+					__callback(err);
 				});
 			}
 		};

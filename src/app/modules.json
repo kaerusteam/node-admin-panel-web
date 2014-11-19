@@ -1,5 +1,7 @@
 {
 	"sidebar": [
+		"app.modules",
+		"app.roles",
 		"moduleTemplate"
 	],
 	"common": {
@@ -14,10 +16,33 @@
 
 	},
 	"coreModules": {
+		"app.datatable": {
+			"main":	"datatable/datatable.js"
+		},
 		"app.sidebar": {
 			"main":	"sidebar/sidebar.js",
 			"dependencies": [
 				"sidebar/services/sidebar-service.js"
+			]
+		},
+		"app.modules": {
+			"info": {
+				"name": "Modules",
+				"url": "/modules"
+			},
+			"main": "modules/modules.js",
+			"dependencies": [
+				"modules/controllers/modules-controller.js"
+			]
+		},
+		"app.roles": {
+			"info": {
+				"name": "Roles",
+				"url": "/roles"
+			},
+			"main": "roles/roles.js",
+			"dependencies": [
+				"roles/controllers/roles-controller.js"
 			]
 		}
 	},

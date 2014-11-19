@@ -1,0 +1,20 @@
+{
+  "name": "node-admin-panel-web",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kaerusteam/node-admin-panel-web",
+  "authors": [
+    "Igor Sbitnev <PinkaminaDianePie@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-translate": "~2.4.2",
+    "angular-translate-loader-static-files": "~2.4.2"
+  }
+}

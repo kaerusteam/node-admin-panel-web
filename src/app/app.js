@@ -2,7 +2,7 @@
 
 (function(){
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "/app/modules.json", true);
+	xhr.open("GET", "/src/app/modules.json", true);
 	xhr.responseType = "text";
 	xhr.onload = function() {
 		if (this.status == 200) {
@@ -18,30 +18,30 @@
 				var sidebarList = [];
 				var error = null;
 
-				mainDependencies.push("/app/common/"+modulesList.common.main);
+				mainDependencies.push("/src/app/common/"+modulesList.common.main);
 				dependentModules.push("app.common");	
 
 				for (var i in modulesList.coreModules){
-					mainDependencies.push("/app/core_modules/"+modulesList.coreModules[i].main);
+					mainDependencies.push("/src/app/core_modules/"+modulesList.coreModules[i].main);
 					dependentModules.push(i);
 				}			
 				for (var i in modulesList.userModules){
-					mainDependencies.push("/app/user_modules/"+modulesList.userModules[i].main);
+					mainDependencies.push("/src/app/user_modules/"+modulesList.userModules[i].main);
 					dependentModules.push(i);
 				}
 
 				
 				for (var i in modulesList.common.dependencies){
-					dependencies.push("/app/common/"+modulesList.common.dependencies[i]);
+					dependencies.push("/src/app/common/"+modulesList.common.dependencies[i]);
 				}
 				for (var i in modulesList.coreModules){
 					for (var j in modulesList.coreModules[i].dependencies){
-						dependencies.push("/app/core_modules/"+modulesList.coreModules[i].dependencies[j]);
+						dependencies.push("/src/app/core_modules/"+modulesList.coreModules[i].dependencies[j]);
 					}
 				}			
 				for (var i in modulesList.userModules){
 					for (var j in modulesList.userModules[i].dependencies){
-						dependencies.push("/app/user_modules/"+modulesList.userModules[i].dependencies[j]);
+						dependencies.push("/src/app/user_modules/"+modulesList.userModules[i].dependencies[j]);
 					}
 				}
 
@@ -61,7 +61,7 @@
 					}
 					module = null;
 				}
-				console.log(sidebarList)
+				
 				if (!error){
 					requirejs(mainDependencies, function () {
 						requirejs(dependencies, function () {

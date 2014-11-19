@@ -7,7 +7,7 @@ var lessMiddleware = require('less-middleware');
 
 var PSEUDOnginx = function(){
 	this.port = 9001;
-	this.apiPort = 9000;
+	this.apiPort = 9800;
 	this.start();
 }
 
@@ -30,15 +30,17 @@ PSEUDOnginx.prototype.start = function(){
 		next();
 	});
 
-
 	this.app.use(lessMiddleware('../src', {debug: true}));
 
-	this.app.use('/', express.static('../src'));
-	this.app.use('*', express.static('../src'));
+	this.app.use('/', express.static('../'));
+	this.app.use('*', express.static('../'));
 
-	this.app.get('/', express.static('../src/index.html'));
-	this.app.get('*', express.static('../src/index.html'));
-
+	this.app.get('/', function(req, res){
+		res.sendFile('src/index.html' , {root: "../"});
+	});
+	this.app.get('*', function(req, res){
+		res.sendFile('src/index.html' , {root: "../"});
+	});
 	var apiProxy = httpProxy.createProxyServer({
 		target: {
 			host: 'localhost', 
