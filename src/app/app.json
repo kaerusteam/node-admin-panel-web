@@ -1,0 +1,88 @@
+{
+	"sidebar": [
+		"modules",
+		"roles",
+		"module_template"
+	],
+	"locales": [{
+		"flag": "ru",
+		"name": "ru-ru"
+	},{
+		"flag": "gb",
+		"name": "en-us"
+	}],
+	"vendorModules":{
+
+	},
+	"coreModules": {
+		"common": {
+			"angularName": "app.common",
+			"main": "common.js",
+			"localized": false,
+			"dependencies":[
+				"services/server-api.js",
+				"services/auth.js"			
+			]
+		},
+		"localization": {
+			"angularName": "app.localization",
+			"main": "localization.js",
+			"localized": false,
+			"dependencies":[
+				"services/localization-service.js",
+				"controllers/localization-controller.js"
+			]
+		},
+		"datatable": {
+			"angularName": "app.datatable",
+			"main":	"datatable.js",
+			"localized": false,
+			"dependencies":[
+				"services/datatable-service.js"
+			]
+		},
+		"sidebar": {
+			"angularName": "app.sidebar",
+			"main":	"sidebar.js",
+			"localized": false,
+			"dependencies": [
+				"services/sidebar-service.js"
+			]
+		},
+		"modules": {
+			"angularName": "app.modules",
+			"info": {
+				"url": "/modules"
+			},
+			"main": "modules.js",
+			"localized": true,
+			"dependencies": [
+				"controllers/modules-controller.js"
+			]
+		},
+		"roles": {
+			"angularName": "app.roles",
+			"info": {
+				"url": "/roles"
+			},
+			"main": "roles.js",
+			"localized": true,
+			"dependencies": [
+				"controllers/roles-controller.js"
+			]
+		}
+	},
+	"userModules": {
+		"module_template": {
+			"angularName": "moduleTemplate",
+			"info": {
+				"url": "/module_template"
+			},
+			"main": "module-template.js",
+			"localized": true,
+			"dependencies": [
+				"controllers/module-template-controller.js"
+			]
+		}
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"roles": {
+		"name": "Роли",
+		"Create role": "Создать роль",
+		"Roles list": "Список ролей",
+		"Authorization types": "Типы авторизаций"
+	}
+}

@@ -15,6 +15,9 @@
   ],
   "dependencies": {
     "angular-translate": "~2.4.2",
-    "angular-translate-loader-static-files": "~2.4.2"
+    "angular-translate-loader-static-files": "~2.4.2",
+    "angular-translate-loader-partial": "~2.4.2",
+    "flag-icon-css": "~0.6.4",
+    "angular-bootstrap": "~0.12.0"
   }
 }

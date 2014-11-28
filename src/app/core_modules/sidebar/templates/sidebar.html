@@ -3,6 +3,6 @@
 		<li><a href="#" ng-click="toggleMobileSidebar()" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"  ng-class="sidebarCollapsed?'glyphicon-chevron-right':'glyphicon-chevron-left'" ></i></a></li>
 	</ul>
 	<ul class="nav nav-sidebar">
-		<li><a href="{{module.url}}" ng-repeat="module in modules">{{module.name}}</a></li>
+		<li><a href="{{module.url}}" ng-repeat="module in modules">{{module.name+'.name' | translate}}</a></li>
 	</ul>
 </div>

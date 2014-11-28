@@ -14,7 +14,7 @@
 				}
 				var params = {
 					authToken: auth.authToken,
-					locale: localization.currentLocale
+					locale: localization.currentLocale.name
 				}
 				if (typeof(__data) != "undefined" && __data != null){
 					params.data = __data;
