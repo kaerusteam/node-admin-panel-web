@@ -58,7 +58,7 @@
 				if (!error){
 					requirejs(mainDependencies, function () {
 						requirejs(dependencies, function () {
-							var app = angular.module("app", ["app.common", "app.sidebar", "app.localization", 'pascalprecht.translate']);
+							var app = angular.module("app", ["app.common", "app.sidebar", "app.localization"]);
 
 							app.config(["$locationProvider", "$translateProvider", function ($locationProvider, $translateProvider) {
 								$locationProvider.html5Mode(true);
