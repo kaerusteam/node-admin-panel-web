@@ -1,0 +1,54 @@
+@import "../../../../bower_components/bootstrap/less/variables.less";
+
+@size: 0.5em;
+@color: @brand-info;
+
+.animation(@animation) {
+  -webkit-animation: @animation;
+       -o-animation: @animation;
+          animation: @animation;
+}
+
+.keyframes (@name, @fromRules, @toRules) {
+	@-webkit-keyframes ~'@{name}' { 0% { @fromRules(); } 100% { @toRules(); } }
+	@keyframes ~'@{name}' { 0% { @fromRules(); } 100% { @toRules(); } }
+}
+
+.preloader{
+	box-sizing: border-box;
+	position: relative;
+	display: inline-block;
+	padding: @size;
+	vertical-align: middle;
+	text-align: center;
+	background-color: transparent;
+	border: 5px solid transparent;
+	border-top-color: @color;
+	border-bottom-color: @color;
+	border-radius: 50%;
+	.animation(spin 1s infinite);
+}
+
+.preloader:after{
+	box-sizing: border-box;
+	position: relative;
+	display: inline-block;
+	padding: @size;
+	vertical-align: middle;
+	text-align: center;
+	background-color: transparent;
+	border: 5px solid transparent;
+	border-top-color: @color;
+	border-bottom-color: @color;
+	border-radius: 50%;
+	.animation(spin 1s infinite);
+	display: table;
+	content: " ";
+}
+
+.keyframes(spin, {
+	transform: rotateZ(0deg);
+},
+{
+	transform: rotateZ(360deg);
+});

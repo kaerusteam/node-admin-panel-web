@@ -20,6 +20,9 @@
 		];
 
 		$scope.modulesTable = datatableService.createTable({url: "/modules/get"});
+		$scope.masterDataTable = datatableService.createTable();
+
+		$scope.masterDataTable.setData([{name: "roles"}, {name: "groups"}, {name: "users"}]);
 
 		console.log('init modules module');
 	}]);
