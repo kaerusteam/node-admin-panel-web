@@ -44,6 +44,12 @@
 			"dependencies": [
 				"roles/controllers/roles-controller.js"
 			]
+		},
+		"app.contextMenu": {
+			"main":	"context_menu/context_menu.js",
+			"dependencies": [
+				
+			]
 		}
 	},
 	"userModules": {

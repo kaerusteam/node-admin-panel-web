@@ -55,6 +55,10 @@ PSEUDOnginx.prototype.start = function(){
 
 	http.createServer(this.app).listen(this.port);
 	console.log('PSEUDOnginx running on ' + this.port);
+
+	process.on("uncaughtException", function(err) {
+		console.error(err);
+	});
 }
 
 var server = new PSEUDOnginx();

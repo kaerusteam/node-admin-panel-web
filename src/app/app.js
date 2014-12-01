@@ -65,7 +65,7 @@
 				if (!error){
 					requirejs(mainDependencies, function () {
 						requirejs(dependencies, function () {
-							var app = angular.module("app", ["app.common", "app.sidebar"]);
+							var app = angular.module("app", ['ui.bootstrap',"app.common", "app.sidebar", "app.contextMenu"]);
 
 							app.config(["$locationProvider", function ($locationProvider) {
 								$locationProvider.html5Mode(true);
