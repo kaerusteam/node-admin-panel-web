@@ -2,61 +2,54 @@
 
 (function(){
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "/src/app/modules.json", true);
+	xhr.open("GET", "/src/app/app.json", true);
 	xhr.responseType = "text";
 	xhr.onload = function() {
 		if (this.status == 200) {
 			try {
-				var modulesList = JSON.parse(this.response);
+				var appConfig = JSON.parse(this.response);
 			}catch(e){
 				console.error("Modules list file seems to be broken. Initialization failed.");
 			}
-			if (modulesList){
+			if (appConfig){
 				var dependencies = [];
 				var mainDependencies = [];
 				var dependentModules = ["app"];
 				var sidebarList = [];
 				var error = null;
 
-				mainDependencies.push("/src/app/common/"+modulesList.common.main);
-				dependentModules.push("app.common");	
-
-				for (var i in modulesList.coreModules){
-					mainDependencies.push("/src/app/core_modules/"+modulesList.coreModules[i].main);
-					dependentModules.push(i);
+				for (var i in appConfig.coreModules){
+					mainDependencies.push("/src/app/core_modules/"+i+"/"+appConfig.coreModules[i].main);
+					dependentModules.push(appConfig.coreModules[i].angularName);
 				}			
-				for (var i in modulesList.userModules){
-					mainDependencies.push("/src/app/user_modules/"+modulesList.userModules[i].main);
-					dependentModules.push(i);
+				for (var i in appConfig.userModules){
+					mainDependencies.push("/src/app/user_modules/"+i+"/"+appConfig.userModules[i].main);
+					dependentModules.push(appConfig.userModules[i].angularName);
 				}
 
-				
-				for (var i in modulesList.common.dependencies){
-					dependencies.push("/src/app/common/"+modulesList.common.dependencies[i]);
-				}
-				for (var i in modulesList.coreModules){
-					for (var j in modulesList.coreModules[i].dependencies){
-						dependencies.push("/src/app/core_modules/"+modulesList.coreModules[i].dependencies[j]);
+				for (var i in appConfig.coreModules){
+					for (var j in appConfig.coreModules[i].dependencies){
+						dependencies.push("/src/app/core_modules/"+i+"/"+appConfig.coreModules[i].dependencies[j]);
 					}
 				}			
-				for (var i in modulesList.userModules){
-					for (var j in modulesList.userModules[i].dependencies){
-						dependencies.push("/src/app/user_modules/"+modulesList.userModules[i].dependencies[j]);
+				for (var i in appConfig.userModules){
+					for (var j in appConfig.userModules[i].dependencies){
+						dependencies.push("/src/app/user_modules/"+i+"/"+appConfig.userModules[i].dependencies[j]);
 					}
 				}
 
-				for (var i in modulesList.sidebar){
-					if (modulesList.coreModules[modulesList.sidebar[i]]){
-						var module = modulesList.coreModules[modulesList.sidebar[i]];
-					}else if (modulesList.userModules[modulesList.sidebar[i]]){
-						var module = modulesList.userModules[modulesList.sidebar[i]];
+				for (var i in appConfig.sidebar){
+					if (appConfig.coreModules[appConfig.sidebar[i]]){
+						var module = appConfig.coreModules[appConfig.sidebar[i]];
+					}else if (appConfig.userModules[appConfig.sidebar[i]]){
+						var module = appConfig.userModules[appConfig.sidebar[i]];
 					}else{
-						console.warn("Could not find module "+modulesList.sidebar[i]+" to add in sidebar");
+						console.warn("Could not find module "+appConfig.sidebar[i]+" to add in sidebar");
 					}
-					if (module && module.info && module.info.name && module.info.url){
-						sidebarList.push(module.info);
+					if (module && module.info  && module.info.url){
+						module.info.name = appConfig.sidebar[i];						sidebarList.push(module.info);
 					}else{
-						error = "Module "+modulesList.sidebar[i]+" must have field 'info' which contains fields 'name' and 'url'";
+						error = "Module "+appConfig.sidebar[i]+" must have field 'info' which contains field 'url'";
 						break;
 					}
 					module = null;
@@ -65,13 +58,21 @@
 				if (!error){
 					requirejs(mainDependencies, function () {
 						requirejs(dependencies, function () {
-							var app = angular.module("app", ['ui.bootstrap',"app.common", "app.sidebar", "app.contextMenu"]);
 
-							app.config(["$locationProvider", function ($locationProvider) {
+							var app = angular.module("app", ["app.common", "app.sidebar", "app.localization"]);
+
+							app.config(["$locationProvider", "$translateProvider", function ($locationProvider, $translateProvider) {
 								$locationProvider.html5Mode(true);
+								$translateProvider.useLoader('$translatePartialLoader', {  
+									urlTemplate: '/src/app/{part}/localization/{lang}.json'
+								});
 							}]);
-							app.run(["sidebarService", function (sidebarService) {
+							app.run(["$rootScope", "$translate", "sidebarService", "localization", function ($rootScope, $translate, sidebarService, localization) {
 								sidebarService.setModuleList(sidebarList);
+								localization.useConfig(appConfig);
+								$rootScope.$on('$translatePartialLoaderStructureChanged', function () {
+									$translate.refresh();
+								});
 							}]);			
 							angular.bootstrap(document, dependentModules);
 						});

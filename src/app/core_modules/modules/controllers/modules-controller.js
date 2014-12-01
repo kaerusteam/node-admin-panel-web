@@ -2,6 +2,7 @@
 
 (function(){
 	angular.module("app.modules").controller("modulesController", ["$scope", "serverAPI", "datatableService", function($scope, serverAPI, datatableService) {
+
 		$scope.authTypes = [
 			{
 				name: "simple",

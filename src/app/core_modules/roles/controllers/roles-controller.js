@@ -1,7 +1,7 @@
 "use strict";
 
 (function(){
-	angular.module("app.roles").controller("rolesController", ["$scope", "serverAPI", function($scope, serverAPI) {
+	angular.module("app.roles").controller("rolesController", ["$scope", "serverAPI", function($scope, serverAPI) {		
 		$scope.authTypes = [
 			{
 				name: "simple",

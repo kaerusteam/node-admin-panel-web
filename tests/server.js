@@ -30,7 +30,7 @@ PSEUDOnginx.prototype.start = function(){
 		next();
 	});
 
-	this.app.use(lessMiddleware('../src', {debug: true}));
+	this.app.use(lessMiddleware('../', {debug: true}));
 
 	this.app.use('/', express.static('../'));
 	this.app.use('*', express.static('../'));

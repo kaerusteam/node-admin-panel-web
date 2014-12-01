@@ -1,0 +1,42 @@
+<section id="module-template">
+	<h1 class="page-header">
+		{{'roles.name' | translate}}
+	</h1>
+	<p>
+		<button type="button" class="btn btn-success">
+			<span class="glyphicon glyphicon-plus"></span>
+			<span class="">{{'roles.Create role' | translate}}</span>
+		</button>
+		<button type="button" class="btn btn-success">
+			<span class="glyphicon glyphicon-plus"></span>
+			<span class="">{{'roles.Create role' | translate}}</span>
+		</button>
+	</p>
+	<div class="row">
+		<div class="col-xs-6 col-sm-6 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					{{'roles.Roles list' | translate}}
+				</div>
+
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-9">
+			
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			{{'roles.Authorization types' | translate}}
+		</div>
+		<div class="panel-body">
+			<div class="checkbox" ng-repeat="authType in authTypes">
+				<label>
+					<input type="checkbox" value="">
+					{{authType.description}}
+				</label>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,8 @@
+{
+	"roles": {
+		"name": "Roles",
+		"Create role": "Create role",
+		"Roles list": "Roles list",
+		"Authorization types": "Authorization types"
+	}
+}
