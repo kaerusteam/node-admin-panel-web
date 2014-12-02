@@ -1,6 +1,5 @@
-'use strict';
 (function() {
-
+  'use strict';
 
 	var module = angular.module('app.contextMenu', ['app']);
 
@@ -24,35 +23,9 @@
 		}
 	})
 
-	module.controller("ContextMenuCtrl", function($scope, $document, ContextMenuService){
+	module.controller("ContextMenuCtrl", function($scope, ContextMenuService){
 		$scope.contextMenuItems = ContextMenuService.contextMenuItems;
 		$scope.object = ContextMenuService.object;
-
-		function close(menuElement) {
-			menuElement.removeClass('open');
-		}
-
-		function handleKeyUpEvent(event) {
-			if (event.keyCode === 27) {
-				close(ContextMenuService.menuElement);
-			}
-		}
-
-		function handleClickEvent(event) {
-			if (event.target !== ContextMenuService.element  || event.button !== 2) {
-				close(ContextMenuService.menuElement);
-			}
-		}
-
-		$document.bind('keyup', handleKeyUpEvent);
-		$document.bind('click', handleClickEvent);
-		$document.bind('contextmenu', handleClickEvent);
-
-		$scope.$on('$destroy', function() {
-			$document.unbind('keyup', handleKeyUpEvent);
-			$document.unbind('click', handleClickEvent);
-			$document.unbind('contextmenu', handleClickEvent);
-		});
 	})
 
 	module.directive('ngSubContextMenu', function($parse, $compile, $document, ContextMenuService){
@@ -61,12 +34,20 @@
 				var object = $parse(attrs.ngSubContextMenu);
 				if (object(scope) && object(scope).length){
 					var SubContextMenuHtml = document.createElement('ul');
-					SubContextMenuHtml = angular.element(SubContextMenuHtml).html('<li ng-repeat="el in el.items" ng-class="{\'dropdown-submenu\' : el.items.length}""><a ng-sub-context-menu="el.items"> \
+					SubContextMenuHtml = angular.element(SubContextMenuHtml).html('<li ng-repeat="el in el.items" ng-class="{\'dropdown-submenu\' : el.items.length}"><a ng-sub-context-menu="el.items"> \
 								<i ng-if="el.iconClass" class="glyphicon {{el.iconClass}}"></i>{{el.title}}</a> \
 							</li>');
 					SubContextMenuHtml[0].classList.add('dropdown-menu');
 					$compile(SubContextMenuHtml)(scope);
 					element.after(SubContextMenuHtml);	
+				}
+
+				function openQ(event){
+					/*console.log(element[0].scrollHeight);
+					console.log(element[0].scrollWidth);
+					angular.element(SubContextMenuHtml)[0].firstChild.style.top = element[0].scrollHeight +'px';
+					angular.element(SubContextMenuHtml)[0].firstChild.style.left = element[0].scrollWidth+'px';*/
+					SubContextMenuHtml[0].classList.add('open');
 				}
 
 				element.bind("mouseover", function (changeEvent) {
@@ -76,7 +57,8 @@
 					if (SubContextMenuHtml){
 						scope.el.openSubMenu = true;
 						ContextMenuService.subMenuElement = SubContextMenuHtml;
-						SubContextMenuHtml[0].classList.add('open');
+						openQ(changeEvent);
+						///SubContextMenuHtml[0].classList.add('open');
 					}
 				})
 			}
@@ -112,6 +94,26 @@
 					ContextMenuHtml[0].classList.add('open');
 				}
 
+				function close(menuElement) {
+					menuElement.removeClass('open');
+				}
+
+				function handleKeyUpEvent(event) {
+					if (event.keyCode === 27) {
+						scope.$apply(function() {
+							close(ContextMenuService.menuElement);
+						});
+					}
+				}
+
+				function handleClickEvent(event) {
+					if (event.target !== ContextMenuService.element  || event.button !== 2) {
+						scope.$apply(function() {
+							close(ContextMenuService.menuElement);
+						});
+					}
+				}
+				//$compile(ContextMenuHtml)(scope);
 				element.bind('contextmenu', function(event) {
 
 					scope.$apply(function() {
@@ -123,7 +125,7 @@
 				
 						ContextMenuService.menuElement = ContextMenuHtml;
 						ContextMenuService.element = event.target;
-						console.log(scope[attrs.ngContextMenu]);
+
 						angular.copy(object(scope), ContextMenuService.object);
 						angular.copy(scope[attrs.ngContextMenu], ContextMenuService.contextMenuItems);
 
@@ -131,7 +133,10 @@
 						
 					});
 
-					
+					$document.bind('keyup', handleKeyUpEvent);
+					$document.bind('click', handleClickEvent);
+					$document.bind('mousedown', handleClickEvent);
+					$document.bind('contextmenu', handleClickEvent);
 				});
 			}
 		}

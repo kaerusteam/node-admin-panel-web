@@ -1,7 +1,7 @@
 "use strict";
 
 (function(){
-	angular.module("app.roles").controller("rolesController", ["$scope", "serverAPI", function($scope, serverAPI) {
+	angular.module("app.roles").controller("rolesController", ["$scope", "serverAPI", function($scope, serverAPI) {		
 		$scope.authTypes = [
 			{
 				name: "simple",
@@ -19,12 +19,5 @@
 		];
 
 		console.log('init roles module');
-
-		$scope.action = function(object){
-			console.log(object.description);
-		}
-
-		$scope.list = [{title: 'asda', handler : $scope.action, items : [{title: "нееще", items : [{title : "ненет"}]}]},
-						{title: 'пора', iconClass : "glyphicon-refresh", items :[{title: "еще", items : [{title : "дада"}]}]}];
 	}]);
 })();
