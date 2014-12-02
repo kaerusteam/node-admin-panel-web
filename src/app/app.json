@@ -21,7 +21,8 @@
 			"localized": false,
 			"dependencies":[
 				"services/server-api.js",
-				"services/auth.js"			
+				"services/auth.js",
+				"directives/common-directives.js"		
 			]
 		},
 		"localization": {

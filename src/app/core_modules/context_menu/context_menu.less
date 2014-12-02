@@ -1,3 +1,5 @@
+@import "../../../../bower_components/bootstrap/less/variables.less";
+
 .dropdown-submenu{
 	position:relative;
 
@@ -20,5 +22,11 @@
 		>.dropdown-menu{
 			left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;
 		}
+	}
+
+	&:hover>a {
+		text-decoration: none;
+		color: @dropdown-link-hover-color;
+		background-color: @dropdown-link-hover-bg;
 	}
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 (function(){
-	var module = angular.module('app.roles', ['app', 'ngRoute']);
+	var module = angular.module('app.roles', ['app', 'ngRoute', 'app.contextMenu']);
 
 	module.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 		$routeProvider.when('/roles', {
