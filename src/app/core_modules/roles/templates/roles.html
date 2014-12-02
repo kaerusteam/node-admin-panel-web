@@ -31,7 +31,7 @@
 			{{'roles.Authorization types' | translate}}
 		</div>
 		<div class="panel-body">
-			<div class="checkbox" ng-repeat="authType in authTypes">
+			<div class="checkbox" ng-repeat="authType in authTypes" ng-context-menu="list" context-menu-object="authType">
 				<label>
 					<input type="checkbox" value="">
 					{{authType.description}}
