@@ -15,14 +15,16 @@
 				this.data = [];
 				this.total = 0;
 				this.url = params.url;
+				this.updating = false;
 				if (this.url){
-					this.updateInfo();
+					this.refresh();
 				}
 			}
 
-			Datatable.prototype.updateInfo = function() {
+			Datatable.prototype.refresh = function() {
 				var self = this;
 				if (this.url){
+					this.updating = true;
 					serverAPI.call(this.url , function(err, res){
 						var next = function(){
 							var i = 0;
@@ -37,6 +39,7 @@
 									}else{
 										self.total = res.data.length;
 									}
+									self.updating = false;
 								}
 							}
 							handlers[i](res.data, res.total, res.params, _next);
@@ -51,8 +54,10 @@
 								}else{
 									self.total = res.data.length;
 								}
+								self.updating = false;
 							}
 						} else {
+							self.updating = false;
 							console.error("Error during fetching data. Can not get data for table from server");
 						}
 					});

@@ -21,7 +21,9 @@
 			"localized": false,
 			"dependencies":[
 				"services/server-api.js",
-				"services/auth.js"			
+				"services/auth.js",
+				"services/template-service.js",
+				"directives/preloader.js"
 			]
 		},
 		"localization": {

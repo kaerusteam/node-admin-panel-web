@@ -23,7 +23,9 @@
 		$scope.masterDataTable = datatableService.createTable();
 
 		$scope.masterDataTable.setData([{name: "roles"}, {name: "groups"}, {name: "users"}]);
-
+		$scope.refresh = function(){
+			$scope.modulesTable.refresh();
+		}
 		console.log('init modules module');
 	}]);
 })();
