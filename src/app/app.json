@@ -2,7 +2,8 @@
 	"sidebar": [
 		"modules",
 		"roles",
-		"module_template"
+		"module_template",
+		"test_tree_view"
 	],
 	"locales": [{
 		"flag": "ru",
@@ -21,7 +22,9 @@
 			"localized": false,
 			"dependencies":[
 				"services/server-api.js",
-				"services/auth.js"			
+				"services/auth.js",
+				"directives/tree-view.js",
+				"directives/drag-drop.js"		
 			]
 		},
 		"localization": {
@@ -89,6 +92,17 @@
 			"localized": true,
 			"dependencies": [
 				"controllers/module-template-controller.js"
+			]
+		},
+		"test_tree_view": {
+			"angularName": "testTreeView",
+			"info": {
+				"url": "/test_tree_view"
+			},
+			"main": "test-tree-view.js",
+			"localized": false,
+			"dependencies": [
+				"controllers/tree-view-controller.js"
 			]
 		}
 	}

@@ -34,13 +34,19 @@
 
 		function handleKeyUpEvent(event) {
 			if (event.keyCode === 27) {
-				close(ContextMenuService.menuElement);
+				if (ContextMenuService.menuElement){
+					close(ContextMenuService.menuElement);
+					ContextMenuService.menuElement = null;
+				}
 			}
 		}
 
 		function handleClickEvent(event) {
 			if (event.target !== ContextMenuService.element  || event.button !== 2) {
-				close(ContextMenuService.menuElement);
+				if (ContextMenuService.menuElement){
+					close(ContextMenuService.menuElement);
+					ContextMenuService.menuElement = null;
+				}
 			}
 		}
 
