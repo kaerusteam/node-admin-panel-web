@@ -9,8 +9,10 @@
 			el.addEventListener(
 				'dragstart',
 				function(e) {
+					if (e.stopPropagation) e.stopPropagation();
 					e.dataTransfer.effectAllowed = 'move';
-					e.dataTransfer.setData('Text', this.id);
+					e.dataTransfer.setData('text/plain', 'This text may be dragged');
+					this.id = "__angularLastDraggingItem";
 					this.classList.add('drag');
 					return false;
 				},
@@ -31,7 +33,7 @@
 	angular.module('app.common').directive('droppable', function() {
 		return {
 			scope: {
-				drop : "="
+				drop : "&"
 			},
 			link: function(scope, element) {
 				var el = element[0];
@@ -41,7 +43,7 @@
 					'dragover',
 					function(e) {
 						e.dataTransfer.dropEffect = 'move';
-						// allows us to drop
+
 						if (e.preventDefault) e.preventDefault();
 						this.classList.add('over');
 						return false;
@@ -53,14 +55,11 @@
 					'drop',
 					function(e) {
 						if (e.stopPropagation) e.stopPropagation();
-
+						if (e.preventDefault) e.preventDefault();
 						this.classList.remove('over');
 
-						var item = document.getElementById(e.dataTransfer.getData('Text'));
-						//this.appendChild(item);
-
-						//var item = document.getElementById("__angularLastDraggingItem");
-						//item.id = "";
+						var item = document.getElementById("__angularLastDraggingItem");
+						item.id = "";
 						var draggedScope = angular.element(item).scope();
 						var droppedScope = angular.element(this).scope();
 

@@ -4,6 +4,7 @@ var express = require('express');
 var http = require('http');
 var httpProxy = require('http-proxy');
 var lessMiddleware = require('less-middleware');
+var autoprefixer = require('express-autoprefixer');
 
 var PSEUDOnginx = function(){
 	this.port = 9001;
@@ -31,7 +32,7 @@ PSEUDOnginx.prototype.start = function(){
 	});
 
 	this.app.use(lessMiddleware('../', {debug: true}));
-
+	this.app.use(autoprefixer({ browsers: 'last 2 versions', cascade: false }));
 	this.app.use('/', express.static('../'));
 	this.app.use('*', express.static('../'));
 

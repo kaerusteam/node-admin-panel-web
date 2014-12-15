@@ -7,6 +7,10 @@
 			<span class="glyphicon glyphicon-plus"></span>
 			<span class="">{{'modules.Create module' | translate}}</span>
 		</button>
+		<button type="button" class="btn btn-success" ng-click="refresh()">
+			<span class="glyphicon glyphicon-plus"></span>
+			<span class="">refresh</span>
+		</button>
 	</p>
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-md-3">
@@ -14,8 +18,8 @@
 				<div class="panel-heading">
 					{{'modules.Modules list' | translate}}
 				</div>
-				<div class="panel-body">
-					<table class="table table-striped table-bordered">
+				<div class="panel-body" preloader="modulesTable.updating">
+					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>{{'modules.Module' | translate}}</th>
@@ -26,6 +30,28 @@
 							<tr ng-repeat="module in modulesTable.data">
 								<td>{{module.name}}</td>
 								<td>{{module.version}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					{{'modules.Master data' | translate}}
+				</div>
+
+				<div class="panel-body">
+					<table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>{{'modules.Master data type' | translate}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="masterData in masterDataTable.data">
+								<td>{{masterData.name}}</td>
 							</tr>
 						</tbody>
 					</table>

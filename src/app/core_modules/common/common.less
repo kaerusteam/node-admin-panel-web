@@ -1,0 +1,63 @@
+@import "../../../../bower_components/bootstrap/less/variables.less";
+@import "../../../../bower_components/bootstrap/less/mixins.less";
+
+@size: 10px;
+@color: @brand-info;
+
+.preloader-parent{
+	position: relative;
+}
+
+.preloader{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	background: fade(@table-bg-hover, 30%);
+	div {
+		box-sizing: border-box;
+		display: inline-block;
+		padding: @size;
+		vertical-align: middle;
+		text-align: center;
+		background-color: transparent;
+		border: 5px solid transparent;
+		border-top-color: @color;
+		border-bottom-color: @color;
+		border-radius: 50%;
+		animation: spin 1s infinite;
+		width: @size * 4 + @size*2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 60px;
+		margin: auto;
+	}
+	div:after{
+		box-sizing: border-box;
+		position: relative;
+		display: inline-block;
+		padding: @size;
+		vertical-align: middle;
+		text-align: center;
+		background-color: transparent;
+		border: 5px solid transparent;
+		border-top-color: @color;
+		border-bottom-color: @color;
+		border-radius: 50%;
+		animation: spin 1s infinite;
+		display: table;
+		content: " ";
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotateZ(0deg);
+	} 100% {
+		transform: rotateZ(360deg);
+	}
+}

@@ -24,7 +24,9 @@
 				"services/server-api.js",
 				"services/auth.js",
 				"directives/tree-view.js",
-				"directives/drag-drop.js"		
+				"directives/drag-drop.js",
+				"services/template-service.js",
+				"directives/preloader.js"
 			]
 		},
 		"localization": {
