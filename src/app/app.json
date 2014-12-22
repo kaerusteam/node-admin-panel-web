@@ -22,8 +22,10 @@
 			"dependencies":[
 				"services/server-api.js",
 				"services/auth.js",
+				"services/storage.js",
 				"services/template-service.js",
-				"directives/preloader.js"
+				"directives/preloader.js",
+				"directives/cache.js"
 			]
 		},
 		"localization": {
@@ -40,7 +42,8 @@
 			"main":	"datatable.js",
 			"localized": false,
 			"dependencies":[
-				"services/datatable-service.js"
+				"services/datatable-service.js",
+				"directives/pagination.js"
 			]
 		},
 		"sidebar": {

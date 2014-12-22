@@ -1,7 +1,7 @@
 "use strict";
 
 (function(){
-	angular.module("app.roles").controller("rolesController", ["$scope", "serverAPI", function($scope, serverAPI) {		
+	angular.module("app.roles").controller("rolesController", ["$scope", "serverAPI", "storage", function($scope, serverAPI, storage) {		
 		$scope.authTypes = [
 			{
 				name: "simple",
@@ -17,7 +17,7 @@
 				description: "2-step auth (login+password, sms code)"
 			}
 		];
-
+		storage.setPrefix("roles");
 		console.log('init roles module');
 	}]);
 })();

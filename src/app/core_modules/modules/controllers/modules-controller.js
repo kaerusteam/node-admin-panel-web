@@ -1,8 +1,7 @@
 "use strict";
 
 (function(){
-	angular.module("app.modules").controller("modulesController", ["$scope", "serverAPI", "datatableService", function($scope, serverAPI, datatableService) {
-
+	angular.module("app.modules").controller("modulesController", ["$scope", "serverAPI", "datatableService", "storage", function($scope, serverAPI, datatableService, storage) {
 		$scope.authTypes = [
 			{
 				name: "simple",
@@ -20,12 +19,12 @@
 		];
 
 		$scope.modulesTable = datatableService.createTable({url: "/modules/get"});
-		$scope.masterDataTable = datatableService.createTable();
-
-		$scope.masterDataTable.setData([{name: "roles"}, {name: "groups"}, {name: "users"}]);
+		$scope.masterDataTable = datatableService.createTable({pagination: true, count:2});
+		$scope.masterDataTable.refresh([{name: "roles"}, {name: "groups"}, {name: "users"}, {name: "users2"}, {name: "users3"}, {name: "users4"}, {name: "users5"}, {name: "roles"}, {name: "groups"}, {name: "users"}, {name: "users2"}, {name: "users3"}, {name: "users4"}, {name: "roles"}, {name: "groups"}, {name: "users"}, {name: "users2"}, {name: "users3"}, {name: "users4"}, {name: "roles"}, {name: "groups"}, {name: "users"}, {name: "users2"}, {name: "users3"}, {name: "users4"}, {name: "roles"}, {name: "groups"}, {name: "users"}, {name: "users2"}, {name: "users3"}, {name: "users4"}]);
 		$scope.refresh = function(){
 			$scope.modulesTable.refresh();
 		}
-		console.log('init modules module');
+		storage.setPrefix("modules");
+		console.log('init modules module', $scope.masterDataTable);
 	}]);
 })();
