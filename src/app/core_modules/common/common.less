@@ -61,3 +61,28 @@
 		transform: rotateZ(360deg);
 	}
 }
+
+tree {
+	background: @body-bg;
+	border: 1px solid transparent;
+	border-color: @navbar-default-border;
+	overflow-x :scroll;
+
+	.child {
+		margin-left: 20px;
+
+		a {
+			white-space: nowrap;
+		}
+	}
+
+	.over {
+		border: 2px solid @color;
+	}
+
+	.beetween-node {
+		height: 10px;
+		width: 100px;
+	}
+
+}

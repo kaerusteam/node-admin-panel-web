@@ -1,11 +1,15 @@
-<div ng-show="treeNode.childVisible" class="nav">
-	<div id="treeNode.id" ng-repeat="treeNode in treeNode.children" draggable droppable>
-		<a>
-			<i class="glyphicon" 
-			ng-class="treeNode.children && treeNode.children.length ? (treeNode.childVisible ? 'glyphicon-minus' : 'glyphicon-plus') :  treeNode.iconClass" 
-			ng-click="showChild(treeNode)"></i>
-			{{treeNode.label || treeNode}}
-		</a>
-		<ng-include src="templatePath" ng-if="treeNode.children && treeNode.children.length">
+<div ng-show="treeNode.expand || expandAll && treeNode.expand!=false" class="child">
+	<div ng-repeat="treeNode in treeNode.childs">
+		<div class="beetween-node" droppable="treeForestAllowed || false" drop="nodeInNode"></div>
+		<div draggable="dragDropAllowed" droppable="dragDropAllowed" drop="nodeInChild">
+			<a>
+				<i class="glyphicon" 
+				ng-class="treeNode.childs && treeNode.childs.length!=0 || treeNode.getChilds ? (treeNode.expand || expandAll && treeNode.expand!=false ? 'glyphicon-minus' : 'glyphicon-plus') :  treeNode.iconClass" 
+				ng-click="showChild(treeNode)"></i>
+				<span ng-click="getData(treeNode)">{{treeNode.label || treeNode}}</span>
+			</a>
+			<ng-include src="templatePath" ng-if="treeNode.childs && treeNode.childs.length">
+		</div>
+		<!--<div ng-show="$index==treeNode.childs.length" class="after-node" droppable="treeForrest || false" drop="nodeInNode"></div>-->
 	</div>
 <div>

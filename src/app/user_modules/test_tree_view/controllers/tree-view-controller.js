@@ -3,46 +3,105 @@
 (function(){
 	angular.module('testTreeView').controller('testTreeViewController', ['$scope', 'serverAPI', function($scope, serverAPI) {
 
+		$scope.movedNode = [];
+		$scope.updating = false;
+		$scope.treeData = "sdfsdfd";
+
+		var handlerChilds = function(parent, data, callback){
+			var childs = [], deletedChilds = [], newChilds=[];
+
+			for(var i =0; i< $scope.movedNode.length; i++){
+				if ($scope.movedNode[i].oldParent==parent.id){
+					deletedChilds.push($scope.movedNode[i].child.id);
+				}
+				if ($scope.movedNode[i].newParent==parent.id){
+					newChilds.push($scope.movedNode[i].child);
+				}
+			}
+			for(var i=0; i< data.length; i++){
+				if (deletedChilds.indexOf(data[i]._id)==-1){
+					childs.push({
+						id : data[i]._id,
+						label : data[i].name,
+						iconClass : 'glyphicon-heart',
+						data : data[i].name,
+						childs : true
+					})
+				}
+			}
+			if (newChilds.length){
+				childs = childs.concat(newChilds);
+			}
+			callback(childs);
+		}
+
+		var onDropNodeInChild = function(oldParent, newParent, child){
+			$scope.movedNode.push({oldParent : oldParent.id, newParent : newParent.id, child : child})
+		}
+
 		$scope.tree = {
-			children : [
+			dragDropAllowed : false, 
+			onDropNodeInChild : onDropNodeInChild,
+			expandAll : false,
+			getChilds : {
+					url : "/modules/get",
+					params : {},
+					handler : handlerChilds
+			},
+			getData : {
+				url : "/modules/get",
+				params : {},
+				//handler : handlerData
+			},
+			treeNode : [
+			{
+				id : 123,
+				label: 'Animal',
+				childs : true
+			},
 			{
 				id : 1,
 				label: 'Animal',
-				children: [
+				childs: true
+			}
+		]
+	}
+
+	$scope.tree2 = {
+			dragDropAllowed : true,
+			expandAll : true,
+			treeNode : [
+			{
+				id : 123,
+				label: 'Animal',
+				childs : [
 					{
-						id : 2,
 						label: 'Dog',
 						iconClass : 'glyphicon-heart',
 						data: {
-							description: ""
+							description: "Dog"
 						}
 					}, {
-						id : 3,
 						label: 'Cat',
 						iconClass : 'glyphicon-heart',
 						data: {
-						  description: ""
+						  description: "Cat"
 						}
 					}, {
-						id : 5,
 						label: 'Hippopotamus',
 						iconClass : 'glyphicon-heart',
 						data: {
-						  description: ""
+						  description: "Hippopotamus"
 						}
 					}, {
-						id : 4,
 						label: 'Chicken',
 						iconClass : 'glyphicon-heart',
-						children: [
+						childs: [
 							{
-								id : 6,
 								label :'White Leghorn'
 							},{ 
-								id : 7,
 								label: 'Rhode Island Red'
 							},{
-								id : 8,
 								label: 'Jersey Giant'
 							}
 						]
@@ -52,41 +111,34 @@
 			{
 				id : 1,
 				label: 'Animal',
-				children: [
+				childs: [
 					{
-						id : 2,
 						label: 'Dog',
 						iconClass : 'glyphicon-heart',
 						data: {
-							description: ""
+							description: "Dog"
 						}
 					}, {
-						id : 3,
 						label: 'Cat',
 						iconClass : 'glyphicon-heart',
 						data: {
-						  description: ""
+						  description: "Cat"
 						}
 					}, {
-						id : 5,
 						label: 'Hippopotamus',
 						iconClass : 'glyphicon-heart',
 						data: {
-						  description: ""
+						  description: "Hippopotamus"
 						}
 					}, {
-						id : 4,
 						label: 'Chicken',
 						iconClass : 'glyphicon-heart',
-						children: [
+						childs: [
 							{
-								id : 6,
 								label :'White Leghorn'
 							},{ 
-								id : 7,
 								label: 'Rhode Island Red'
 							},{
-								id : 8,
 								label: 'Jersey Giant'
 							}
 						]
