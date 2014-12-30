@@ -3,6 +3,7 @@
 		"modules",
 		"roles",
 		"module_template",
+		"module_template_CRUD",
 		"test_tree_view"
 	],
 	"locales": [{
@@ -92,6 +93,17 @@
 			"angularName": "moduleTemplate",
 			"info": {
 				"url": "/module_template"
+			},
+			"main": "module-template.js",
+			"localized": true,
+			"dependencies": [
+				"controllers/module-template-controller.js"
+			]
+		},
+		"module_template_CRUD": {
+			"angularName": "moduleTemplateCrud",
+			"info": {
+				"url": "/module_template_CRUD"
 			},
 			"main": "module-template.js",
 			"localized": true,

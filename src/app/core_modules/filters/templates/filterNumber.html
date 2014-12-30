@@ -1,0 +1,8 @@
+<span>{{filter.title}}</span>
+<select ng-model="filter.flag" ng-option="flag in flags">
+    <option>flag</option>
+    <!--<option value="$lte"><=</option>
+    <option value="$gt">></option>
+    <option value="$lt"><</option>-->
+</select>
+<input type="text" ng-model="filter.value" ng-show="filter.type=='number'">

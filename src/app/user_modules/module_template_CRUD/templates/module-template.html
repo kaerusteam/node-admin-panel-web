@@ -1,0 +1,67 @@
+<section id="module-template">
+	<h1 class="page-header">{{'module_template.header' | translate}}</h1>
+	<div class="panel-datatable">
+		<div class="row">
+
+			<button class="btn btn-success panel-element">Create</button>
+			<div class="input-group panel-element">
+				<input type="text" class="form-control" placeholder="Search for...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Search</button>
+				</span>
+			</div>
+			<div class="dropdown panel-element" dropdown>
+				<button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+					Filters <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li ng-repeat="filter in filters">
+						<a href="#">{{filter.title}}</a>
+					</li>
+				</ul>
+			</div>
+
+	    </div>
+
+		
+	</div>
+	<table class="table table-hover table-striped table-bordered">
+		<thead>
+			<tr>
+				<th ng-repeat="column in columns" ng-click="sort(column,'asc')">
+					{{column.title}}
+					<span class="glyphicon glyphicon-search" ng-if="column.searchAvailable" ng-click="search(column)"></span>
+					<span 	class="glyphicon" 
+							ng-class="column.sort=='asc'?'glyphicon-arrow-down':column.sort=='desc'?'glyphicon-arrow-up':'glyphicon-sort'" 
+							ng-if="column.isSortable"></span>
+
+					<div ng-if="column.search">
+						<input type="text" ng-model="column.searchStr">
+					</div>
+				</th>
+				<th>
+					Action
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in items">
+				<td ng-repeat="column in columns">
+					<div ng-hide="editable" ng-click="">{{item[column.field]}}</div>
+					<div ng-show="editable"><input type="text" ng-model="item[column.field]"></div>
+				</td>
+				<td>
+					<div ng-hide="editable">
+						<button type="button" class="btn btn btn-info">Info</button>
+						<button type="button" class="btn btn-primary" ng-click="edit()">Edit</button>
+						<button type="button" class="btn btn-danger">Delete</button>
+					</div>
+					<div ng-show="editable">
+						<button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+						<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
