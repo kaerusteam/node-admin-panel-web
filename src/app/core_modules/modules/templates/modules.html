@@ -60,5 +60,29 @@
 			</div>
 			<div ui-pagination="masterDataTable"></div>
 		</div>
+		<div class="col-xs-12 col-sm-12 col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					{{'modules.Master data' | translate}}
+				</div>
+
+				<div class="panel-body">
+					<table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th ng-repeat="column in masterDataTable.columns" ng-click="masterDataTable.sortBy(column, $event)">{{column.caption}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="row in masterDataTable.data">
+								<td ng-repeat="col in masterDataTable.columns" >{{row[col.field]}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+			<div ui-pagination="masterDataTable"></div>
+		</div>
 	</div>
 </section>

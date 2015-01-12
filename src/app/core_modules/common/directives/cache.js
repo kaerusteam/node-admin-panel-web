@@ -34,7 +34,7 @@
 
 	/**
 	 * @ngdoc directive
-	 * @name ngCacheSessionStorage
+	 * @name CacheSessionStorage
 	 * @requires $compile
 	 * @requires $timeout
 	 * @requires $storage
